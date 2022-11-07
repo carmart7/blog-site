@@ -9,11 +9,11 @@ router.post('/', async (req, res) => {
             password: req.body.password //this will be hashed before it is added to the dable
         });
         
-        // use req.session.save to
-            // save loggin state to req.session.loggedIn and save username to req.session.user
-        
-        res.status(200).json(newUser);
-
+        req.session.save(() => {
+            req.session.loggedIn = true;
+            req.session.userId = newUser.id;
+            res.status(200).json(newUser);
+        })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -29,21 +29,22 @@ router.post('/login', async (req, res) => {
         });
 
         if (!userFound) {
-            res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+            res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
             return;
         }
 
         const userPassCheck = await userFound.checkPassword(req.body.password);
 
         if (!userPassCheck) {
-            res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+            res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
             return;
         }
 
-        // use req.session.save to
-            // save loggin state to req.session.loggedIn and save username to req.session.user
-        
-        res.status(200).json({ user: userFound, message: 'You are now logged in!' });
+        req.session.save(() => {
+            req.session.loggedIn = true;
+            req.session.userId = userFound.id;
+            res.status(200).json({ user: userFound, message: 'You are now logged in!' });
+        })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -52,6 +53,13 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     //destroy the req.session with req.session.destroy(callback) to get rid of the cookie on the users side
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+          res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
 });
 
 router.get('/', async (req, res) => {
