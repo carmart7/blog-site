@@ -10,21 +10,27 @@ User.hasMany(Blog, {
     foreignKey: 'user_id',
 });
 
-Blog.belongsTo(User);
+Blog.belongsTo(User, {
+    foreignKey: 'user_id',
+});
 
 //User-Comment relationship
 User.hasMany(Comment, {
     foreignKey: 'user_id',
 });
 
-Comment.belongsTo(User);
+Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+});
 
 //Blog-Comment relationship
 Blog.hasMany(Comment, {
     foreignKey: 'blog_id',
 });
 
-Comment.belongsTo(Blog);
+Comment.belongsTo(Blog, {
+    foreignKey: 'blog_id',
+});
 
 //export models to be used in api and 
 module.exports = {

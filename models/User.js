@@ -1,4 +1,4 @@
-const { Model, DataTypes } = requrie('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
 
@@ -37,6 +37,7 @@ User.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
+        timestamps: false,
         modelName: 'user',
         hooks: {
             async beforeCreate(newUserData) {
