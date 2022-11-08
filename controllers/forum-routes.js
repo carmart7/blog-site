@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog, User } = require('../models');
+const { Blog, User, Comment } = require('../models');
 const middleAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -54,12 +54,28 @@ router.get('/dashboard/edit/:id', middleAuth, async (req, res) => {
     });
 });
 
-router.get('/blog/:id', middleAuth, async (req, res) =>{
+router.get('/dashboard/create', middleAuth, async (req, res) => {
+    res.render('create', {
+        loggedIn: req.session.loggedIn,
+        pageName: 'Your Dashboard' 
+    });
+});
 
-    // res.render('homepage', {
-    //     blogs
-    // });
-    res.status(200);
+router.get('/blog/:id', middleAuth, async (req, res) =>{
+    const blogData = await Blog.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [User, { model: Comment, include: User}]
+    });
+    const blog = blogData.get({ plain: true });
+    const comments = blog.comments;
+    res.render('blog', {
+        blog,
+        comments,
+        loggedIn: req.session.loggedIn,
+        pageName: 'Your Dashboard' 
+    });
 });
 
 module.exports = router;

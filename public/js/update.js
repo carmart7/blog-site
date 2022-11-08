@@ -17,3 +17,19 @@ document.querySelector('form').addEventListener('submit', async (event) => {
         }
     }
 });
+
+document.querySelector('#delete-button').addEventListener('click', async (event) => {
+    event.preventDefault();
+    const id = Number(document.querySelector('form').dataset.id);
+    const response = await fetch('/api/blog', {
+        method: 'DELETE',
+        body: JSON.stringify({ id }),
+        headers: { 'Content-Type': 'application/json' },
+    });
+    console.log(response);
+    if (response.ok) {
+        document.location.replace(`/dashboard`);
+    } else {
+        alert('Something was entered incorrectly, try again.');
+    }
+});

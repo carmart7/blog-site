@@ -1,0 +1,30 @@
+<div class="card text-center m-3" data-id="{{blog.id}}" id="main-post">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2>{{blog.title}}</h2>
+    <h3>Posted by {{blog.user.username}} on {{format_date blog.createdAt}}</h3>
+  </div>
+  <div class="card-body">
+    <p class="text-start">{{blog.text}}</p>
+  </div>
+</div>
+{{#each comments as |comment|}}
+<div class="card text-center m-3">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2></h2>
+    <h3>Comment from {{user.username}} on {{format_date createdAt}}</h3>
+  </div>
+  <div class="card-body">
+    <p class="text-start">{{text}}</p>
+  </div>
+</div>
+{{/each}}
+
+<form>
+    <div class="mb-3">
+        <label for="inputText" class="form-label">Comment</label>
+        <textarea class="form-control" id="inputText" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Comment on post</button>
+</form>
+
+<script src="/js/comment.js"></script>

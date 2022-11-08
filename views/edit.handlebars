@@ -1,13 +1,14 @@
 <form data-id="{{blog.id}}">
     <div class="mb-3">
-        <label for="inputTitle" class="form-label">Email address</label>
+        <label for="inputTitle" class="form-label">Blog Title</label>
         <input class="form-control" id="inputTitle" value="{{blog.title}}">
     </div>
     <div class="mb-3">
-        <label for="inputText" class="form-label">Example textarea</label>
+        <label for="inputText" class="form-label">Blog text</label>
         <textarea class="form-control" id="inputText" rows="3">{{blog.text}}</textarea>
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
+    <button type="submit" id="delete-button" class="btn btn-primary">Delete</button>
 
 <script src="/js/update.js"></script>

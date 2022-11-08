@@ -6,7 +6,7 @@ router.post('/', async (req, res) => {
         const newBlog = await Blog.create({
             text: req.body.text,
             title: req.body.title,
-            user_id: req.body.user_id
+            user_id: req.session.userId
         });
 
         res.status(200).json(newBlog);
@@ -26,6 +26,16 @@ router.put('/', async (req, res) => {
 
         res.status(200).json(updatedBlog);
     } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+router.delete('/', async (req, res) => {
+    try {
+        const result = await Blog.destroy({ where: {id: req.body.id,} });
+        res.status(200).json(result);
+    } catch (error) {
         console.log(err);
         res.status(500).json(err);
     }
