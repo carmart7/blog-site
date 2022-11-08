@@ -12,7 +12,7 @@ const sequelize = require('./config/connection');
 const app = express();
 
 app.use(express.json());
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 app.use(express.static(path.join(__dirname, 'public')));
 
 //setup handlebars
