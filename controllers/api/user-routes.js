@@ -6,7 +6,7 @@ router.post('/', async (req, res) => {
     try {
         const newUser = await User.create({
             username: req.body.username,
-            password: req.body.password //this will be hashed before it is added to the dable
+            password: req.body.password //this will be hashed before it is added to the table
         });
         
         req.session.save(() => {
@@ -27,7 +27,6 @@ router.post('/login', async (req, res) => {
                 username: req.body.username
             }
         });
-
         if (!userFound) {
             res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
             return;

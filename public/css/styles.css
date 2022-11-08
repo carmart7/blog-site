@@ -1,3 +1,14 @@
-html {
-    background-color: brown;
+main {
+    background-color: brown; 
+    height: 100%;
+    overflow: scroll;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.form-text {
+    color: yellow;
 }

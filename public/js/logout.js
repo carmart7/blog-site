@@ -1,4 +1,7 @@
-//query select logout anchor
-
-//function given to anchro click query selector event
-    //make an api call to logout
+document.querySelector('#logout').addEventListener('click', async (event) => {
+    event.preventDefault();
+    await fetch('/api/user/logout', {
+        method: 'POST'
+    });
+    document.location.replace('/');
+})

@@ -1,7 +1,21 @@
-//query select for form submit event
+document.querySelector('form').addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-//function given to form submit query selector event
-    //make an api call to sign up with info provided in form
+    const username = document.querySelector('#input-username').value.trim();
+    const password = document.querySelector('#input-password').value.trim();
 
-    // if a good response is returned, move the user to homepage
-    // if a bad response is returned, alert the user of the error
+    if (username && password) {
+        const response = await fetch('/api/user', {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+        
+        if (response.ok) {
+            console.log(response);
+            document.location.replace('/');
+        } else {
+            alert('Something was entered incorrectly, try again.');
+        }
+    }
+});
