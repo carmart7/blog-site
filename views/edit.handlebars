@@ -1,0 +1,13 @@
+<form data-id="{{blog.id}}">
+    <div class="mb-3">
+        <label for="inputTitle" class="form-label">Email address</label>
+        <input class="form-control" id="inputTitle" value="{{blog.title}}">
+    </div>
+    <div class="mb-3">
+        <label for="inputText" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="inputText" rows="3">{{blog.text}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+<script src="/js/update.js"></script>

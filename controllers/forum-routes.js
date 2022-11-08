@@ -51,7 +51,7 @@ router.get('/dashboard/edit/:id', middleAuth, async (req, res) => {
         blog,
         loggedIn: req.session.loggedIn,
         pageName: 'Your Dashboard' 
-    })
+    });
 });
 
 router.get('/blog/:id', middleAuth, async (req, res) =>{

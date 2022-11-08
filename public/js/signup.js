@@ -12,7 +12,6 @@ document.querySelector('form').addEventListener('submit', async (event) => {
         });
         
         if (response.ok) {
-            console.log(response);
             document.location.replace('/');
         } else {
             alert('Something was entered incorrectly, try again.');
